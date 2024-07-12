@@ -372,6 +372,37 @@
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">計算進點位 (5x)</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="input-high">高點</label>
+                                        <input type="number" class="form-control" id="input-high">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-low">低點</label>
+                                        <input type="number" class="form-control" id="input-low">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-first">第一單</label>
+                                        <input type="number" class="form-control" id="input-first" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-second">第二單</label>
+                                        <input type="number" class="form-control" id="input-second" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Content Row -->
                     <div class="row">
 
@@ -700,7 +731,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Your Website 2024</span>
                     </div>
                 </div>
             </footer>
@@ -753,6 +784,42 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <script>
+        ; (function (w, d) {
+            var App = function (options) {
+                var init = function (options) {
+                    this.cacheDom()
+                    this.bindEvent()
+                }
+    
+                init.call(this, options)
+            }
+    
+            App.prototype.cacheDom = function () {
+                this.inputHighEl = d.querySelector('#input-high')
+                this.inputLowEl = d.querySelector('#input-low')
+                this.inputFirstEl = d.querySelector('#input-first')
+                this.inputSecondEl = d.querySelector('#input-second')
+            }
+    
+            App.prototype.bindEvent = function () {
+                this.inputHighEl.onchange = this.compute
+                this.inputLowEl.onchange = this.compute
+            }
+
+            App.prototype.compute = function () {
+                var highVal = parseFloat(app.inputHighEl.value)
+                var lowVal = parseFloat(app.inputLowEl.value)
+
+                app.inputFirstEl.value = (highVal + lowVal) / 2
+                app.inputSecondEl.value = (highVal + lowVal) / 2 * 0.8
+            }
+    
+            var app = new App
+        })(window, document)
+    </script>
+    
 
 </body>
 

@@ -378,7 +378,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">計算進場點位 (5x)</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">計算進場點位</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -389,6 +389,14 @@
                                     <div class="form-group">
                                         <label for="input-low">低點</label>
                                         <input type="number" class="form-control" id="input-low">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="select-lever">倍率</label>
+                                        <select class="custom-select" id="select-lever">
+                                            <option value="0.8" selected>5x</option>
+                                            <option value="0.9">10x</option>
+                                            <option value="0.95">20x</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="input-first">第一單</label>
@@ -801,19 +809,22 @@
                 this.inputLowEl = d.querySelector('#input-low')
                 this.inputFirstEl = d.querySelector('#input-first')
                 this.inputSecondEl = d.querySelector('#input-second')
+                this.selectLeverEl = d.querySelector('#select-lever')
             }
     
             App.prototype.bindEvent = function () {
                 this.inputHighEl.onchange = this.compute
                 this.inputLowEl.onchange = this.compute
+                this.selectLeverEl.onchange = this.compute
             }
 
             App.prototype.compute = function () {
                 var highVal = parseFloat(app.inputHighEl.value)
                 var lowVal = parseFloat(app.inputLowEl.value)
+                var lever = parseFloat(app.selectLeverEl.value)
 
                 app.inputFirstEl.value = ((highVal + lowVal) / 2).toFixed(6)
-                app.inputSecondEl.value = (((highVal + lowVal) / 2) * 0.8).toFixed(6)
+                app.inputSecondEl.value = (((highVal + lowVal) / 2) * lever).toFixed(6)
             }
     
             var app = new App

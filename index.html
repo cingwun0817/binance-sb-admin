@@ -22,13 +22,13 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="sidebar-toggled">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -378,7 +378,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">計算進點位 (5x)</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">計算進場點位 (5x)</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -812,8 +812,8 @@
                 var highVal = parseFloat(app.inputHighEl.value)
                 var lowVal = parseFloat(app.inputLowEl.value)
 
-                app.inputFirstEl.value = (highVal + lowVal) / 2
-                app.inputSecondEl.value = (highVal + lowVal) / 2 * 0.8
+                app.inputFirstEl.value = ((highVal + lowVal) / 2).toFixed(6)
+                app.inputSecondEl.value = (((highVal + lowVal) / 2) * 0.8).toFixed(6)
             }
     
             var app = new App

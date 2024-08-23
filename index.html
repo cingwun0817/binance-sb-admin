@@ -388,9 +388,12 @@
                                             <option value="1h">1h</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-0 float-right">
+                                    <div class="form-group mb-0 ml-2 float-right">
                                         <input type="date" class="form-control" id="input-ticker-full-date">
                                     </div>
+                                    <button class="btn btn-secondary mb-0 ml-2" id="btn-ticker-full-reload">
+                                        Reload Data
+                                    </button>
                                 </div>
 
                                 <!-- Card Body -->
@@ -724,6 +727,7 @@
             App.prototype.cacheDom = function () {
                 this.selectTickerFullWindowsizeEl = d.querySelector("#select-ticker-full-windowsize")
                 this.inputTickerFullDateEl = d.querySelector("#input-ticker-full-date")
+                this.btnTickerFullReloadEl = d.querySelector("#btn-ticker-full-reload")
                 this.theadTickerFullEl = d.querySelector("#thead-ticker-full")
                 this.tfootTickerFullEl = d.querySelector("#tfoot-ticker-full")
                 this.tbodyTickerFullEl = d.querySelector("#tbody-ticker-full")
@@ -736,10 +740,13 @@
                 this.inputTickerFullDateEl.onchange = function () {
                     app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, this.value)
                 }
+                this.btnTickerFullReloadEl.onclick = function () {
+                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, app.inputTickerFullDateEl.value)
+                }
             }
 
             App.prototype.getTickerFullData = function (windowSize, date) {
-                fetch("http://35.72.5.210:3001/ticker/full?date="+date+"&windowSize="+windowSize)
+                fetch("http://bsb.cingwun.net:3001/ticker/full?date="+date+"&windowSize="+windowSize)
                     .then(function (response) {
                         return response.json();
                     })

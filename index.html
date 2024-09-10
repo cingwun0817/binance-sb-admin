@@ -411,7 +411,50 @@
                     </div>
 
                     <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center">
+                                    <h6 class="m-0 font-weight-bold text-primary">幣種均線分析</h6>
+                                    <button class="btn btn-secondary mb-0 ml-2" id="btn-ma-reload">
+                                        Reload Data
+                                    </button>
+                                </div>
 
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                            <thead id="thead-ma">
+                                                <tr>
+                                                    <th>Coin</th>
+                                                    <th>1d</th>
+                                                    <th>8h</th>
+                                                    <th>4h</th>
+                                                    <th>2h</th>
+                                                    <th>1h</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot id="tfoot-ma">
+                                                <tr>
+                                                    <th>Coin</th>
+                                                    <th>1d</th>
+                                                    <th>8h</th>
+                                                    <th>4h</th>
+                                                    <th>2h</th>
+                                                    <th>1h</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody id="tbody-ma"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
                     <div class="row">
 
                         <!-- Area Chart -->
@@ -719,6 +762,7 @@
                     this.inputTickerFullDateEl.value = defaultDate
 
                     this.getTickerFullData("1d", defaultDate)
+                    this.getMaData()
                 }
     
                 init.call(this, options)
@@ -731,6 +775,10 @@
                 this.theadTickerFullEl = d.querySelector("#thead-ticker-full")
                 this.tfootTickerFullEl = d.querySelector("#tfoot-ticker-full")
                 this.tbodyTickerFullEl = d.querySelector("#tbody-ticker-full")
+                this.btnMaReloadEl = d.querySelector("#btn-ma-reload")
+                this.theadMaEl = d.querySelector("#thead-ma")
+                this.tfootMaEl = d.querySelector("#tfoot-ma")
+                this.tbodyMaEl = d.querySelector("#tbody-ma")
             }
     
             App.prototype.bindEvent = function () {
@@ -743,6 +791,9 @@
                 this.btnTickerFullReloadEl.onclick = function () {
                     app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, app.inputTickerFullDateEl.value)
                 }
+                this.btnMaReloadEl.onclick = function () {
+                    app.getMaData()
+                }
             }
 
             App.prototype.getTickerFullData = function (windowSize, date) {
@@ -751,11 +802,11 @@
                         return response.json();
                     })
                     .then(function (myJson) {
-                        app.buildTable(myJson)
+                        app.buildTickerFullTable(myJson)
                     });
             }
 
-            App.prototype.buildTable = function (data) {
+            App.prototype.buildTickerFullTable = function (data) {
                 app.theadTickerFullEl.innerHTML = ""
                 app.tfootTickerFullEl.innerHTML = ""
                 app.tbodyTickerFullEl.innerHTML = ""
@@ -804,6 +855,80 @@
                     } else {
                         app.tbodyTickerFullEl.appendChild(bodyTrEl)
                     }
+                })
+            }
+
+            App.prototype.getMaData = function () {
+                fetch("http://bsb.cingwun.net:3001/ma")
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (myJson) {
+                        app.buildMaTable(myJson)
+                    });
+            }
+
+            App.prototype.buildMaTable = function (data) {
+                app.tbodyMaEl.innerHTML = ""
+
+                data.data.forEach(rowdata => {
+                    bodyTrEl = d.createElement("tr")
+
+                    bodyTdCoinEl = d.createElement("td")
+                    bodyTdCoinEl.textContent = rowdata.Symbol
+                    bodyTrEl.appendChild(bodyTdCoinEl)
+
+                    bodyTd1dEl = d.createElement("td")
+                    if (rowdata.MaResult.includes("1d")) {
+                        iEl = d.createElement("i")
+                        iEl.classList.add("fas")
+                        iEl.classList.add("fa-check")
+
+                        bodyTd1dEl.appendChild(iEl)
+                    }
+                    bodyTrEl.appendChild(bodyTd1dEl)
+
+                    bodyTd8hEl = d.createElement("td")
+                    if (rowdata.MaResult.includes("8h")) {
+                        iEl = d.createElement("i")
+                        iEl.classList.add("fas")
+                        iEl.classList.add("fa-check")
+
+                        bodyTd8hEl.appendChild(iEl)
+                    }
+                    bodyTrEl.appendChild(bodyTd8hEl)
+
+                    bodyTd4hEl = d.createElement("td")
+                    if (rowdata.MaResult.includes("4h")) {
+                        iEl = d.createElement("i")
+                        iEl.classList.add("fas")
+                        iEl.classList.add("fa-check")
+
+                        bodyTd4hEl.appendChild(iEl)
+                    }
+                    bodyTrEl.appendChild(bodyTd4hEl)
+
+                    bodyTd2hEl = d.createElement("td")
+                    if (rowdata.MaResult.includes("2h")) {
+                        iEl = d.createElement("i")
+                        iEl.classList.add("fas")
+                        iEl.classList.add("fa-check")
+
+                        bodyTd2hEl.appendChild(iEl)
+                    }
+                    bodyTrEl.appendChild(bodyTd2hEl)
+
+                    bodyTd1hEl = d.createElement("td")
+                    if (rowdata.MaResult.includes("1h")) {
+                        iEl = d.createElement("i")
+                        iEl.classList.add("fas")
+                        iEl.classList.add("fa-check")
+
+                        bodyTd1hEl.appendChild(iEl)
+                    }
+                    bodyTrEl.appendChild(bodyTd1hEl)
+
+                    app.tbodyMaEl.appendChild(bodyTrEl)
                 })
             }
     

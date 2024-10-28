@@ -237,13 +237,17 @@
                     this.cacheDom()
                     this.bindEvent()
 
+                    var params = new URLSearchParams(w.location.search)
+                    hour = params.get("hour")
+                    this.hour = hour
+
                     // default
                     var dd = new Date()
-                    dd.setDate(dd.getDate() - 1)
+                    dd.setDate(dd.getDate())
                     var defaultDate = dd.toISOString().substr(0,10)
                     this.inputTickerFullDateEl.value = defaultDate
 
-                    this.getTickerFullData("1h", defaultDate)
+                    this.getTickerFullData("1h", defaultDate, hour)
                     this.getMaData()
                 }
     
@@ -265,21 +269,26 @@
     
             App.prototype.bindEvent = function () {
                 this.selectTickerFullWindowsizeEl.onchange = function () {
-                    app.getTickerFullData(this.value, app.inputTickerFullDateEl.value)
+                    app.getTickerFullData(this.value, app.inputTickerFullDateEl.value, app.hour)
                 }
                 this.inputTickerFullDateEl.onchange = function () {
-                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, this.value)
+                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, this.value, app.hour)
                 }
                 this.btnTickerFullReloadEl.onclick = function () {
-                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, app.inputTickerFullDateEl.value)
+                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, app.inputTickerFullDateEl.value, app.hour)
                 }
                 this.btnMaReloadEl.onclick = function () {
                     app.getMaData()
                 }
             }
 
-            App.prototype.getTickerFullData = function (windowSize, date) {
-                fetch("http://bsb.cingwun.net:3001/ticker/full?date="+date+"&windowSize="+windowSize)
+            App.prototype.getTickerFullData = function (windowSize, date, hour=null) {
+                url = "http://bsb.cingwun.net:3001/ticker/full?date="+date+"&windowSize="+windowSize
+                if (hour != null) {
+                    url += "&hour="+hour
+                }
+
+                fetch(url)
                     .then(function (response) {
                         return response.json();
                     })
@@ -299,8 +308,12 @@
                         headTrEl = d.createElement("tr")
 
                         rowdata.items.forEach(item => {
+                            headAEl = d.createElement("a")
+                            headAEl.textContent = item.name
+                            headAEl.setAttribute("href", w.location.href + "?hour=" + item.name.substr(item.name.indexOf(".")+1))
+
                             headThEl = d.createElement("th")
-                            headThEl.textContent = item.name
+                            headThEl.appendChild(headAEl)
                             headTrEl.insertBefore(headThEl, headTrEl.firstChild)
                         })
                         

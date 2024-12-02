@@ -217,7 +217,7 @@
                     this.cacheDom()
                     this.bindEvent()
 
-                    // // default
+                    // default
                     var dd = new Date()
                     var defaultDate = dd.toISOString().substr(0,10)
 
@@ -269,7 +269,6 @@
                         rowdata.items.forEach(item => {
                             headAEl = d.createElement("a")
                             headAEl.textContent = item.name
-                            headAEl.setAttribute("href", w.location.href + "?date=" + item.name.substr(0, item.name.indexOf(".")) + "&windowSize=" + app.selectTickerFullWindowsizeEl.value + "&hour=" + item.name.substr(item.name.indexOf(".")+1))
 
                             headThEl = d.createElement("th")
                             headThEl.appendChild(headAEl)

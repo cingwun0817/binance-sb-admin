@@ -237,8 +237,13 @@
             App.prototype.bindEvent = function () {
             }
 
-            App.prototype.getTickerFullData = function (windowSize, date) {
-                fetch("http://bsb.cingwun.net:3001/ticker/full?date="+date+"&windowSize="+windowSize)
+            App.prototype.getTickerFullData = function (windowSize, date, hour=null) {
+                url = "http://bsb.cingwun.net:3001/ticker/full?date="+date+"&windowSize="+windowSize
+                if (hour != null) {
+                    url += "&hour="+hour
+                }
+
+                fetch(url)
                     .then(function (response) {
                         return response.json();
                     })
@@ -262,8 +267,12 @@
                         headTrBtcEl = d.createElement("tr")
 
                         rowdata.items.forEach(item => {
+                            headAEl = d.createElement("a")
+                            headAEl.textContent = item.name
+                            headAEl.setAttribute("href", w.location.href + "?date=" + item.name.substr(0, item.name.indexOf(".")) + "&windowSize=" + app.selectTickerFullWindowsizeEl.value + "&hour=" + item.name.substr(item.name.indexOf(".")+1))
+
                             headThEl = d.createElement("th")
-                            headThEl.textContent = item.name
+                            headThEl.appendChild(headAEl)
                             headTrEl.insertBefore(headThEl, headTrEl.firstChild)
 
                             headThBtcEl = d.createElement("th")

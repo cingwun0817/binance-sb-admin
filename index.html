@@ -78,102 +78,82 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                </nav>
-                <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-                        <div class="col-xl-8">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center">
-                                    <h6 class="m-0 font-weight-bold text-primary">幣種趨勢分析</h6>
-                                    <div class="form-group ml-2 mb-0 justify-content-end">
-                                        <select class="custom-select" id="select-ticker-full-windowsize">
-                                            <option value="1d">1d</option>
-                                            <option value="8h">8h</option>
-                                            <option value="4h">4h</option>
-                                            <option value="2h">2h</option>
-                                            <option value="1h" selected>1h</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-0 ml-2 float-right">
-                                        <input type="date" class="form-control" id="input-ticker-full-date">
-                                    </div>
-                                    <button class="btn btn-secondary mb-0 ml-2" id="btn-ticker-full-reload">
-                                        Reload Data
-                                    </button>
-                                </div>
-
-                                <!-- Card Body -->
+                    <div class="row mb-4">
+                        <div class="col-xl-12">
+                            <div class="card shadow">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                            <thead id="thead-ticker-full"></thead>
-                                            <tfoot id="tfoot-ticker-full"></tfoot>
-                                            <tbody id="tbody-ticker-full"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center">
-                                    <h6 class="m-0 font-weight-bold text-primary">幣種均線分析</h6>
-                                    <button class="btn btn-secondary mb-0 ml-2" id="btn-ma-reload">
-                                        Reload Data
-                                    </button>
-                                </div>
-
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                            <thead id="thead-ma">
+                                        <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+                                            <thead id="thead-panel-one">
                                                 <tr>
                                                     <th>Coin</th>
-                                                    <th>1d</th>
-                                                    <th>8h</th>
-                                                    <th>4h</th>
-                                                    <th>2h</th>
-                                                    <th>1h</th>
+                                                    <th>2024-12-01.23</th>
+                                                    <th>2024-12-01.22</th>
+                                                    <th>2024-12-01.21</th>
+                                                    <th>2024-12-01.20</th>
+                                                    <th>2024-12-01.19</th>
+                                                    <th>2024-12-01.18</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>BTCUSDT</th>
+                                                    <th>0.247</th>
+                                                    <th>0.315</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot id="tfoot-ma">
+                                            <tbody id="tbody-panel-one">
+                                                <tr>
+                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
+                                                    <td>Price</td>
+                                                    <td>Change</td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
+                                                    <td>Price</td>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+                                            <thead id="thead-panel-two">
                                                 <tr>
                                                     <th>Coin</th>
-                                                    <th>1d</th>
-                                                    <th>8h</th>
-                                                    <th>4h</th>
-                                                    <th>2h</th>
-                                                    <th>1h</th>
+                                                    <th>2024-12-01.23</th>
+                                                    <th>2024-12-01.22</th>
+                                                    <th>2024-12-01.21</th>
+                                                    <th>2024-12-01.20</th>
+                                                    <th>2024-12-01.19</th>
+                                                    <th>2024-12-01.18</th>
                                                 </tr>
-                                            </tfoot>
-                                            <tbody id="tbody-ma"></tbody>
+                                                <tr>
+                                                    <th>BTCUSDT</th>
+                                                    <th>0.247</th>
+                                                    <th>0.315</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody-panel-two">
+                                                <tr>
+                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
+                                                    <td>Price</td>
+                                                    <td>Change</td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
+                                                    <td>Price</td>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
                     </div>
 
                 </div>
@@ -237,45 +217,24 @@
                     this.cacheDom()
                     this.bindEvent()
 
-                    // default
+                    // // default
                     var dd = new Date()
-                    dd.setDate(dd.getDate() - 1)
                     var defaultDate = dd.toISOString().substr(0,10)
-                    this.inputTickerFullDateEl.value = defaultDate
 
                     this.getTickerFullData("1h", defaultDate)
-                    this.getMaData()
                 }
     
                 init.call(this, options)
             }
     
             App.prototype.cacheDom = function () {
-                this.selectTickerFullWindowsizeEl = d.querySelector("#select-ticker-full-windowsize")
-                this.inputTickerFullDateEl = d.querySelector("#input-ticker-full-date")
-                this.btnTickerFullReloadEl = d.querySelector("#btn-ticker-full-reload")
-                this.theadTickerFullEl = d.querySelector("#thead-ticker-full")
-                this.tfootTickerFullEl = d.querySelector("#tfoot-ticker-full")
-                this.tbodyTickerFullEl = d.querySelector("#tbody-ticker-full")
-                this.btnMaReloadEl = d.querySelector("#btn-ma-reload")
-                this.theadMaEl = d.querySelector("#thead-ma")
-                this.tfootMaEl = d.querySelector("#tfoot-ma")
-                this.tbodyMaEl = d.querySelector("#tbody-ma")
+                this.theadPanelOneEl = d.querySelector("#thead-panel-one")
+                this.tbodyPanelOneEl = d.querySelector("#tbody-panel-one")
+                this.theadPanelTwoEl = d.querySelector("#thead-panel-two")
+                this.tbodyPanelTwoEl = d.querySelector("#tbody-panel-two")
             }
     
             App.prototype.bindEvent = function () {
-                this.selectTickerFullWindowsizeEl.onchange = function () {
-                    app.getTickerFullData(this.value, app.inputTickerFullDateEl.value)
-                }
-                this.inputTickerFullDateEl.onchange = function () {
-                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, this.value)
-                }
-                this.btnTickerFullReloadEl.onclick = function () {
-                    app.getTickerFullData(app.selectTickerFullWindowsizeEl.value, app.inputTickerFullDateEl.value)
-                }
-                this.btnMaReloadEl.onclick = function () {
-                    app.getMaData()
-                }
             }
 
             App.prototype.getTickerFullData = function (windowSize, date) {
@@ -284,35 +243,74 @@
                         return response.json();
                     })
                     .then(function (myJson) {
-                        app.buildTickerFullTable(myJson)
+                        app.buildPanelOneTable(myJson)
                     });
             }
 
-            App.prototype.buildTickerFullTable = function (data) {
-                app.theadTickerFullEl.innerHTML = ""
-                app.tfootTickerFullEl.innerHTML = ""
-                app.tbodyTickerFullEl.innerHTML = ""
+            App.prototype.buildPanelOneTable = function (data) {
+                app.theadPanelOneEl.innerHTML = ""
+                app.tbodyPanelOneEl.innerHTML = ""
+                app.theadPanelTwoEl.innerHTML = ""
+                app.tbodyPanelTwoEl.innerHTML = ""
 
+                limitPanelOne = 10
+                countPancelOne = 0
                 data.data.forEach(rowdata => {
                     if (rowdata.symbol == "BTCUSDT") {
                         // build head columes
                         headTrEl = d.createElement("tr")
+                        headTrBtcEl = d.createElement("tr")
 
                         rowdata.items.forEach(item => {
                             headThEl = d.createElement("th")
                             headThEl.textContent = item.name
                             headTrEl.insertBefore(headThEl, headTrEl.firstChild)
+
+                            headThBtcEl = d.createElement("th")
+                            headThBtcEl.textContent = item.priceChangePercent
+                            headTrBtcEl.insertBefore(headThBtcEl, headTrBtcEl.firstChild)
                         })
                         
                         headFirstThEl = d.createElement("th")
                         headFirstThEl.textContent = "Coin"
                         headTrEl.insertBefore(headFirstThEl, headTrEl.firstChild)
 
-                        app.theadTickerFullEl.innerHTML = headTrEl.innerHTML
-                        app.tfootTickerFullEl.innerHTML = headTrEl.innerHTML
-                    }
+                        headFirstBtcThEl = d.createElement("th")
+                        headFirstBtcThEl.textContent = "BTCUSDT"
+                        headTrBtcEl.insertBefore(headFirstBtcThEl, headTrBtcEl.firstChild)
 
-                    // build body rows
+                        app.theadPanelOneEl.innerHTML = headTrEl.outerHTML + headTrBtcEl.outerHTML
+                        app.theadPanelTwoEl.innerHTML = headTrEl.outerHTML + headTrBtcEl.outerHTML
+                    } else {
+                        if (countPancelOne < limitPanelOne) {
+                            bodyTrEl = d.createElement("tr")
+
+                            rowdata.items.forEach(item => {
+                                bodyTdEl = d.createElement("td")
+                                bodyTdEl.textContent = item.priceChangePercent
+
+                                if (item.priceChangePercent > 0) {
+                                    bodyTdEl.classList.add("text-danger")
+                                } else {
+                                    bodyTdEl.classList.add("text-success")
+                                }
+
+                                bodyTrEl.insertBefore(bodyTdEl, bodyTrEl.firstChild)
+                            })
+
+                            bodyFirstThEl = d.createElement("td")
+                            bodyFirstThEl.textContent = rowdata.symbol
+                            bodyTrEl.insertBefore(bodyFirstThEl, bodyTrEl.firstChild)
+
+                            app.tbodyPanelOneEl.appendChild(bodyTrEl)
+
+                            countPancelOne++
+                        }
+                    }
+                })
+
+                for (var i=0; i<10; i++) {
+                    rowdata = data.data[data.data.length-1-i]
                     bodyTrEl = d.createElement("tr")
 
                     rowdata.items.forEach(item => {
@@ -332,86 +330,8 @@
                     bodyFirstThEl.textContent = rowdata.symbol
                     bodyTrEl.insertBefore(bodyFirstThEl, bodyTrEl.firstChild)
 
-                    if (rowdata.symbol == "BTCUSDT") {
-                        app.tbodyTickerFullEl.insertBefore(bodyTrEl, app.tbodyTickerFullEl.firstChild)
-                    } else {
-                        app.tbodyTickerFullEl.appendChild(bodyTrEl)
-                    }
-                })
-            }
-
-            App.prototype.getMaData = function () {
-                fetch("http://bsb.cingwun.net:3001/ma")
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (myJson) {
-                        app.buildMaTable(myJson)
-                    });
-            }
-
-            App.prototype.buildMaTable = function (data) {
-                app.tbodyMaEl.innerHTML = ""
-
-                data.data.forEach(rowdata => {
-                    bodyTrEl = d.createElement("tr")
-
-                    bodyTdCoinEl = d.createElement("td")
-                    bodyTdCoinEl.textContent = rowdata.Symbol
-                    bodyTrEl.appendChild(bodyTdCoinEl)
-
-                    bodyTd1dEl = d.createElement("td")
-                    if (rowdata.MaResult.includes("1d")) {
-                        iEl = d.createElement("i")
-                        iEl.classList.add("fas")
-                        iEl.classList.add("fa-check")
-
-                        bodyTd1dEl.appendChild(iEl)
-                    }
-                    bodyTrEl.appendChild(bodyTd1dEl)
-
-                    bodyTd8hEl = d.createElement("td")
-                    if (rowdata.MaResult.includes("8h")) {
-                        iEl = d.createElement("i")
-                        iEl.classList.add("fas")
-                        iEl.classList.add("fa-check")
-
-                        bodyTd8hEl.appendChild(iEl)
-                    }
-                    bodyTrEl.appendChild(bodyTd8hEl)
-
-                    bodyTd4hEl = d.createElement("td")
-                    if (rowdata.MaResult.includes("4h")) {
-                        iEl = d.createElement("i")
-                        iEl.classList.add("fas")
-                        iEl.classList.add("fa-check")
-
-                        bodyTd4hEl.appendChild(iEl)
-                    }
-                    bodyTrEl.appendChild(bodyTd4hEl)
-
-                    bodyTd2hEl = d.createElement("td")
-                    if (rowdata.MaResult.includes("2h")) {
-                        iEl = d.createElement("i")
-                        iEl.classList.add("fas")
-                        iEl.classList.add("fa-check")
-
-                        bodyTd2hEl.appendChild(iEl)
-                    }
-                    bodyTrEl.appendChild(bodyTd2hEl)
-
-                    bodyTd1hEl = d.createElement("td")
-                    if (rowdata.MaResult.includes("1h")) {
-                        iEl = d.createElement("i")
-                        iEl.classList.add("fas")
-                        iEl.classList.add("fa-check")
-
-                        bodyTd1hEl.appendChild(iEl)
-                    }
-                    bodyTrEl.appendChild(bodyTd1hEl)
-
-                    app.tbodyMaEl.appendChild(bodyTrEl)
-                })
+                    app.tbodyPanelTwoEl.appendChild(bodyTrEl)
+                }
             }
     
             var app = new App

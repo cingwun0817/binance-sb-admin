@@ -86,69 +86,19 @@
                         <div class="col-xl-12">
                             <div class="card shadow">
                                 <div class="card-body">
+                                    <h4>漲勢前25</h4>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
-                                            <thead id="thead-panel-one">
-                                                <tr>
-                                                    <th>Coin</th>
-                                                    <th>2024-12-01.23</th>
-                                                    <th>2024-12-01.22</th>
-                                                    <th>2024-12-01.21</th>
-                                                    <th>2024-12-01.20</th>
-                                                    <th>2024-12-01.19</th>
-                                                    <th>2024-12-01.18</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>BTCUSDT</th>
-                                                    <th>0.247</th>
-                                                    <th>0.315</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbody-panel-one">
-                                                <tr>
-                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
-                                                    <td>Price</td>
-                                                    <td>Change</td>
-                                                </tr>
-                                                <tr>
-                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
-                                                    <td>Price</td>
-                                                    <td>Change</td>
-                                                </tr>
-                                            </tbody>
+                                            <thead id="thead-panel-one"></thead>
+                                            <tbody id="tbody-panel-one"></tbody>
                                         </table>
                                     </div>
                                     <hr>
+                                    <h4>跌勢前25</h4>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
-                                            <thead id="thead-panel-two">
-                                                <tr>
-                                                    <th>Coin</th>
-                                                    <th>2024-12-01.23</th>
-                                                    <th>2024-12-01.22</th>
-                                                    <th>2024-12-01.21</th>
-                                                    <th>2024-12-01.20</th>
-                                                    <th>2024-12-01.19</th>
-                                                    <th>2024-12-01.18</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>BTCUSDT</th>
-                                                    <th>0.247</th>
-                                                    <th>0.315</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbody-panel-two">
-                                                <tr>
-                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
-                                                    <td>Price</td>
-                                                    <td>Change</td>
-                                                </tr>
-                                                <tr>
-                                                    <td data-toggle="tooltip" title="1h 2h 4h 8h 1d">Coin</td>
-                                                    <td>Price</td>
-                                                    <td>Change</td>
-                                                </tr>
-                                            </tbody>
+                                            <thead id="thead-panel-two"></thead>
+                                            <tbody id="tbody-panel-two"></tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -217,11 +167,25 @@
                     this.cacheDom()
                     this.bindEvent()
 
-                    // default
-                    var dd = new Date()
-                    var defaultDate = dd.toISOString().substr(0,10)
+                    var pDate = null
+                    var pHour = null
 
-                    this.getTickerFullData("1h", defaultDate)
+                    // search
+                    let params = new URLSearchParams(w.location.search);
+                    if (params.has('date') != null) {
+                        pDate = params.get('date')
+                    }
+                    if (params.has('hour') != null) {
+                        pHour = params.get('hour')
+                    }
+
+                    // default
+                    if (pDate == null) {
+                        var dd = new Date()
+                        var pDate = dd.toISOString().substr(0,10)
+                    }
+
+                    this.getTickerFullData("1h", pDate, pHour)
                 }
     
                 init.call(this, options)
@@ -258,7 +222,7 @@
                 app.theadPanelTwoEl.innerHTML = ""
                 app.tbodyPanelTwoEl.innerHTML = ""
 
-                limitPanelOne = 10
+                limitPanelOne = 25
                 countPancelOne = 0
                 data.data.forEach(rowdata => {
                     if (rowdata.symbol == "BTCUSDT") {
@@ -269,6 +233,7 @@
                         rowdata.items.forEach(item => {
                             headAEl = d.createElement("a")
                             headAEl.textContent = item.name
+                            headAEl.setAttribute("href", w.location.pathname + "?date="+item.name.substr(0, 10)+"&hour="+item.name.substr(11, 13))
 
                             headThEl = d.createElement("th")
                             headThEl.appendChild(headAEl)
@@ -317,7 +282,7 @@
                     }
                 })
 
-                for (var i=0; i<10; i++) {
+                for (var i=0; i<25; i++) {
                     rowdata = data.data[data.data.length-1-i]
                     bodyTrEl = d.createElement("tr")
 
